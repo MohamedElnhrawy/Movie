@@ -1,0 +1,2 @@
+com.example.splash
+drawable logo
