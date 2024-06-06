@@ -39,6 +39,7 @@ This movie application provides users with an extensive collection of films, all
   <img align="left" src="https://drive.google.com/file/d/1Ibp1e6qA4M3t4Ox8Wa_Ldu4lFp35KK1E/view?usp=sharing" width="20%">
   <img align="left" src="https://drive.google.com/file/d/18rusxdO-I65UjjP-4bpYm4TIc8TQXDnu/view?usp=sharing" width="20%">
   <img align="left" src="https://drive.google.com/file/d/1yGzhvYwx1vym2jDU8ltrtzkyWqor1Do2/view?usp=sharing" width="20%">
+</div>
   
 
 
