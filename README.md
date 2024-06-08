@@ -6,10 +6,41 @@ This movie application provides users with an extensive collection of films, all
 - This project embraces a robust development approach by incorporating Multi-Module, MVVM (Model-View-ViewModel), and Clean Architecture principles.
 
 
-## Multi-Module
-- The modular structure enhances maintainability, scalability, and extensibility.
-- Each module can be developed independently, fostering code organization and minimizing dependencies.
+# MVVM-Clean-Architecture:
+Model-view-viewmodel is a software design pattern consisting of three layers:
 
+Model (in our architecture combined with Clean Architecture refers to a domain model representing real state content).
+View (activities, fragments, it displays data received through view-model).
+View Model (the View Model represents an abstraction of the view, it receives data from the Model, performs necessary UI logic, and then exposes appropriate data to the View, alongside that, View Model manipulates the Model based on actions on the View. The View has a reference to a View Model but View Model doesn’t know anything about the View).
+
+### Modules
+Modules are the collection of source files and build settings that allow you to divide your project into discrete units of functionality.
+
+- **App Module**
+
+  `:app` module is an [com.android.application](https://developer.android.com/studio/projects/android-library), which is needed to create the app bundle. It contains dependency graph and UI related classes. It presents data to screen and handle user interactions.
+
+- **Common Module**
+
+  `:common` module contains code and resources which are shared between other modules
+
+- **Core Module**
+
+  `:core` module contains bellow packages:
+
+  `:local` module contains local data source related classes
+
+  `:remote` module contains remote data source related classes
+
+  `:di` module contains implementation of repository and local - remote repository interface adapt
+
+  `:repos` module contains use cases and repository interface adapt
+
+  `:utils` most of useful extensions.
+
+- **features Module**
+
+  `:features` module contains business logic
 ## Clean Architecture
 - Clean Architecture principles are applied to each feature module in this project.
 
