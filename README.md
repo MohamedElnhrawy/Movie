@@ -68,13 +68,15 @@ Modules are the collection of source files and build settings that allow you to 
 ## 📸 Screens
 
 ### Dark Mode
-<div>
 
-  <img align="left" src="https://drive.google.com/file/d/1klcOebGQLE_xw1sGhhSetTBtER0tx2n7/view?usp=sharing" width="20%">
-  <img align="left" src="https://drive.google.com/file/d/1Ibp1e6qA4M3t4Ox8Wa_Ldu4lFp35KK1E/view?usp=sharing" width="20%">
-  <img align="left" src="https://drive.google.com/file/d/18rusxdO-I65UjjP-4bpYm4TIc8TQXDnu/view?usp=sharing" width="20%">
-  <img align="left" src="https://drive.google.com/file/d/1yGzhvYwx1vym2jDU8ltrtzkyWqor1Do2/view?usp=sharing" width="20%">
-</div>
+![Image Description](https://drive.google.com/uc?id=1klcOebGQLE_xw1sGhhSetTBtER0tx2n7)
+![Image Description](https://drive.google.com/uc?id=1Ibp1e6qA4M3t4Ox8Wa_Ldu4lFp35KK1E)
+![Image Description](https://drive.google.com/uc?id=18rusxdO-I65UjjP-4bpYm4TIc8TQXDnu)
+![Image Description](https://drive.google.com/uc?id=1yGzhvYwx1vym2jDU8ltrtzkyWqor1Do2)
+
+
+
+
   
 
 
