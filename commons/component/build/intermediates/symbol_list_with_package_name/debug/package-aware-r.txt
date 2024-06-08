@@ -1,3 +1,0 @@
-com.example.component
-drawable ic_invisible
-drawable ic_visible

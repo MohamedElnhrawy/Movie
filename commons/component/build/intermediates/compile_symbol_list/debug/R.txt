@@ -1,2 +1,0 @@
-int drawable ic_invisible 0x0
-int drawable ic_visible 0x0
