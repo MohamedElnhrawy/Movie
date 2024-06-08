@@ -25,9 +25,13 @@ This movie application provides users with an extensive collection of films, all
  *  `Paging3`  Allows for the gradual loading of large datasets from the data source easily
  *  `Hilt` for dependency injection
  *  `Coroutines` for asynchronous programming
+ *  `Room` for local cache 
 - Flow
 - OKHttp
 - Retrofit
+- Moshi
+- Coil
+- Pager
 - TMDB API
 
 ## 📸 Screens

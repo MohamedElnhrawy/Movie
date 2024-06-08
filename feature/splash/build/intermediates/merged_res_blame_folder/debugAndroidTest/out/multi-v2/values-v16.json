@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.splash.test.splash-mergeDebugAndroidTestResources-67:/values-v16/values-v16.xml",
+            "outputFile": "com.example.splash.test.splash-mergeDebugAndroidTestResources-74:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/mohamedelnhrawy/.gradle/caches/transforms-3/dda0c1a7eb65371992d6ececc141bcbe/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "source": "/Users/mohamedelnhrawy/.gradle/caches/transforms-3/3d6b400a522268cd5acf29f10804a7e5/transformed/core-1.12.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/mohamedelnhrawy/.gradle/caches/transforms-3/f361a667168ac8467a302d68abc43b3f/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/mohamedelnhrawy/.gradle/caches/transforms-3/d8b45aa79cef2f3226476c1c2ac52735/transformed/core-1.12.0/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

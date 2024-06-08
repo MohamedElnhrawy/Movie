@@ -12,38 +12,49 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.example.core.model.ResultHomeUI
+import com.example.component.ErrorPage
+import com.example.component.LoadingPage
 import com.example.core.repos.home.MovieType
 import com.example.home.component.MoviesHorizontalPager
 import com.example.home.component.TabBar
+import com.example.home.component.model.HomeUI
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(
-    pagingItems: LazyPagingItems<ResultHomeUI>,
+    pagingItems: LazyPagingItems<HomeUI>,
     onNavigateDetailScreen: (String) -> Unit,
     selectedTabIndex: Int,
+    error: String,
+    isLoading: Boolean,
     onTabSelected: (MovieType) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
-    ) {
-        item {
-            TabBar(selectedTabIndex, onTabSelected = onTabSelected)
-        }
-        item {
-            Spacer(modifier = Modifier.height(25.dp))
-        }
-        item {
-            MoviesHorizontalPager(
-                pagingItems = pagingItems,
-                onNavigateDetailScreen = onNavigateDetailScreen
-            )
-        }
-    }
+    if (isLoading)
+        LoadingPage()
+    else if(error.isNotEmpty())
+        ErrorPage(error)
+    else {
+       LazyColumn(
+           modifier = Modifier
+               .fillMaxSize()
+               .background(MaterialTheme.colorScheme.background)
+               .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
+       ) {
+           item {
+               TabBar(selectedTabIndex, onTabSelected = onTabSelected)
+           }
+           item {
+               Spacer(modifier = Modifier.height(25.dp))
+           }
+           item {
+               MoviesHorizontalPager(
+                   pagingItems = pagingItems,
+                   onNavigateDetailScreen = onNavigateDetailScreen
+               )
+           }
+       }
+   }
+
 }
 
 

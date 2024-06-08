@@ -19,22 +19,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
 
-
-//    @Provides
-//    @Singleton
-//    fun provideSplashUseCases(
-//        splashAuthRepository: SplashAuthRepository
-//    ): SplashUseCases {
-//        return SplashUseCases(
-//            isSignedInUseCase = IsSignedInUseCase(
-//                splashAuthRepository = splashAuthRepository
-//            ),
-//            readOnBoardingStateUseCase = ReadOnBoardingStateUseCase(
-//                dataStoreRepository = dataStoreRepository
-//            )
-//        )
-//    }
-
     @Provides
     @Singleton
     fun provideHomeUseCases(
@@ -68,36 +52,6 @@ object UseCaseModule {
         )
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideProfileUseCases(
-//        imageRepository: ImageRepository,
-//        profileAuthenticationRepository: ProfileAuthenticationRepository
-//    ): com.example.profile.domain.usecase.ProfileUseCases {
-//        return com.example.profile.domain.usecase.ProfileUseCases(
-//            uploadProfileImageUseCase = com.example.profile.domain.usecase.UploadProfileImageUseCase(
-//                imageRepository = imageRepository
-//            ),
-//            saveUserProfileImageUseCase = com.example.profile.domain.usecase.SaveUserProfileImageUseCase(
-//                imageRepository = imageRepository
-//            ),
-//            signOutUseCase = com.example.profile.domain.usecase.SignOutUseCase(
-//                authenticationRepository = profileAuthenticationRepository
-//            )
-//        )
-//    }
-
-
-//    @Provides
-//    @Singleton
-//    fun provideUseCase(
-//        userRepository: UserRepository,
-//    ): UseCases {
-//        return UseCases(
-//            getUserUseCase = GetUserUseCase(userRepository = userRepository),
-//            getUserProfileImageUseCase = GetUserProfileImageUseCase(userRepository = userRepository),
-//        )
-//    }
 }
 
 

@@ -20,6 +20,10 @@ android {
 
         buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
         buildConfigField "String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\""
+        buildConfigField "String", "DATABASE_VERSION", "\"${ProjectConfig.VERSION_NAME}\""
+        buildConfigField "String", "DATABASE_NAME", "\"movie-app\""
+        buildConfigField "int", "DATABASE_VERSION", "1"
+        buildConfigField "boolean", "DATABASE_EXPORT_SCHEMA", "true"
 
     }
 
@@ -77,6 +81,7 @@ dependencies {
     // Retrofit
     implementation libs.retrofit
     implementation libs.retrofit.converter
+    implementation libs.retrofit.converter.moshi
 
     //Pager
     implementation libs.accompanist.pager
@@ -89,13 +94,20 @@ dependencies {
     implementation libs.paging.runtime
     implementation libs.paging.compose
 
-    implementation libs.moshi
+    api(libs.moshi)
+    implementation libs.moshi.adapters
+    kapt libs.moshi.compiler
+
     implementation libs.logging
     implementation libs.okhttp
-    implementation libs.moshi.adapters
 
-
-
+    // Coil
+    implementation libs.coil
+    //room
+    api(libs.room.runtime)
+    api(libs.room.paging)
+    implementation libs.room.ktx
+    kapt libs.room.compiler
 }
 kapt {
     correctErrorTypes true

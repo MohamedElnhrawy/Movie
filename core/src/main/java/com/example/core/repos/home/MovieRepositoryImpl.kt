@@ -1,54 +1,78 @@
 package com.example.core.repos.home
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import com.example.core.local.dao.PlayingMovieDao
+import com.example.core.local.dao.PopularMovieDao
+import com.example.core.local.dao.UpcomingMovieDao
+import com.example.core.local.database.MovieDatabase
+import com.example.core.local.entity.PlayingMovieEntity
+import com.example.core.local.entity.PopularMovieEntity
+import com.example.core.local.entity.UpcomingMovieEntity
 import com.example.core.remote.datasource.MovieDataSource
+import com.example.core.repos.home.paging.PlayingMoviesListRemoteMediator
+import com.example.core.repos.home.paging.PopularMoviesListRemoteMediator
+import com.example.core.repos.home.paging.UpcomingMoviesListRemoteMediator
+import com.example.core.repos.paging.utils.PagingDataWithSource
+import com.example.core.repos.paging.utils.createPagingFlow
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import com.example.core.remote.response.home.Result
-import com.example.core.remote.service.HomeApiService
+import kotlinx.coroutines.flow.map
 
-class MovieRepositoryImpl(private val apiService: HomeApiService) : MovieRepository {
-    override fun getUpComingMovies(): Flow<PagingData<Result>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 3,
+class MovieRepositoryImpl(
+    private val database: MovieDatabase,
+    private val dataSource: MovieDataSource
+) : MovieRepository {
+    private val popularMovieDao: PopularMovieDao = database.popularMovieDao()
+    private val upcomingMovieDao: UpcomingMovieDao = database.upcomingMovieDao()
+    private val playingMovieDao: PlayingMovieDao = database.playingMovieDao()
+
+
+    override fun getUpComingMovies(scope: CoroutineScope): Flow<PagingDataWithSource<UpcomingMovieEntity>> {
+        val source = MovieType.UPCOMING.name
+
+        return createPagingFlow(
+            remoteMediator =
+            UpcomingMoviesListRemoteMediator(
+                dataSource,
+                database,
+                source
             ),
-            pagingSourceFactory = {
-                MovieDataSource(
-                    apiService = apiService,
-                    movieType = MovieType.UPCOMING
-                )
-            },
-        ).flow
+            pagingSourceFactory = { upcomingMovieDao.listMovies(source) },
+            scope = scope,
+            source = source,
+            totalCountDao = database.totalCountDao(),
+        )
     }
 
-    override fun getPopularMovies(): Flow<PagingData<Result>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 3,
+    override fun getPopularMovies(scope: CoroutineScope): Flow<PagingDataWithSource<PopularMovieEntity>> {
+        val source = MovieType.POPULAR.name
+        return createPagingFlow(
+            remoteMediator =
+            PopularMoviesListRemoteMediator(
+                dataSource,
+                database,
+                source
             ),
-            pagingSourceFactory = {
-                MovieDataSource(
-                    apiService = apiService,
-                    movieType = MovieType.POPULAR
-                )
-            },
-        ).flow
+            pagingSourceFactory = { popularMovieDao.listMovies(source) },
+            scope = scope,
+            source = source,
+            totalCountDao = database.totalCountDao(),
+        )
     }
 
-    override fun getNowPlayingMovies(): Flow<PagingData<Result>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 1
+    override fun getNowPlayingMovies(scope: CoroutineScope): Flow<PagingDataWithSource<PlayingMovieEntity>> {
+        val source = MovieType.NOW_PLAYING.name
+        return createPagingFlow(
+            remoteMediator =
+            PlayingMoviesListRemoteMediator(
+                dataSource,
+                database,
+                source
             ),
-            pagingSourceFactory = {
-                MovieDataSource(
-                    apiService = apiService,
-                    movieType = MovieType.NOW_PLAYING
-                )
-            }
-        ).flow
+            pagingSourceFactory = { playingMovieDao.listMovies(source) },
+            scope = scope,
+            source = source,
+            totalCountDao = database.totalCountDao(),
+        )
     }
 }
 

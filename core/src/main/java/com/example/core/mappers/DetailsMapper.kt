@@ -3,7 +3,7 @@ package com.example.core.mappers
 import com.example.core.model.CastUI
 import com.example.core.model.MovieDetailUI
 import com.example.detail.data.model.credit.Cast
-import com.example.detail.data.model.detail.MovieDetail
+import com.example.core.remote.response.detail.MovieDetail
 
 
 fun MovieDetail.toMovieDetailUI(): MovieDetailUI {

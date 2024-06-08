@@ -22,7 +22,7 @@ firebase-firestore = "24.1.1"
 firebase-storage = "20.0.1"
 firebase-auth = "21.0.3"
 animated-bar = "1.0.0"
-paging = "3.1.1"
+paging = "3.3.0"
 paging-compose = "1.0.0-alpha20"
 coil-version = "2.4.0"
 agp = "7.4.2"
@@ -56,10 +56,12 @@ hilt-common = { module = "androidx.hilt:hilt-common", version.ref = "hilt" }
 
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebase-firestore" }
 firebase-auth = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebase-auth" }
 firebase-storage = { module = "com.google.firebase:firebase-storage", version.ref = "firebase-storage" }
@@ -87,6 +89,7 @@ okhttp = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "o
 logging = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+moshi-compiler = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
 
 

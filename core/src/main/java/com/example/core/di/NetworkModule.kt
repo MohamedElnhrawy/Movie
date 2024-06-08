@@ -1,22 +1,31 @@
 package com.example.core.di
 
 import android.content.Context
+import com.example.core.SingleEvent
+import com.example.core.remote.datasource.MovieDataSource
 import com.example.core.remote.interceptors.CacheInterceptor
 import com.example.core.remote.interceptors.NetworkConnectionInterceptor
 import com.example.core.remote.service.DetailApiService
 import com.example.core.remote.service.HomeApiService
 import com.example.core.utils.Constants.BASE_URL
+import com.example.core.utils.getMoshiObject
 import com.example.domain.BuildConfig
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNot
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import javax.inject.Singleton
 
@@ -24,6 +33,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = getMoshiObject()
+
+    @Singleton
+    @Provides
+    fun provideMoshiConverterFactory(moshi: Moshi): Converter.Factory = MoshiConverterFactory.create(moshi)
+
+    @Singleton
+    @Provides
+    fun provideTokenExpirationMutableFlow(): MutableStateFlow<SingleEvent<Long>> = MutableStateFlow(SingleEvent(-1L, -1))
+
+    @Singleton
+    @Provides
+    fun provideTokenExpirationFlow(tokenExpirationFlow: MutableStateFlow<SingleEvent<Long>>): Flow<SingleEvent<Long>> =
+        tokenExpirationFlow.filterNot { it.data == -1L }
 
     @Singleton
     @Provides
@@ -82,5 +107,12 @@ object NetworkModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    @Singleton
+    @Provides
+    fun provideMovieDataSource(
+        homeService: HomeApiService,
+        moshi: Moshi,
+        tokenExpirationFlow: MutableStateFlow<SingleEvent<Long>>,
+    ) = MovieDataSource(homeService, moshi, tokenExpirationFlow)
 
 }

@@ -1,14 +1,15 @@
 package com.example.core.usecase.home
 
-import androidx.paging.PagingData
-import com.example.core.remote.response.home.Result
+import com.example.core.local.entity.PlayingMovieEntity
 import com.example.core.repos.home.MovieRepository
+import com.example.core.repos.paging.utils.PagingDataWithSource
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
 class GetNowPlayingMovieUseCase(
     private val movieRepository: MovieRepository
 ) {
-    operator fun invoke(): Flow<PagingData<Result>> {
-        return movieRepository.getNowPlayingMovies()
+    operator fun invoke(scope: CoroutineScope): Flow<PagingDataWithSource<PlayingMovieEntity>> {
+        return movieRepository.getNowPlayingMovies(scope)
     }
 }

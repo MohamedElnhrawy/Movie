@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.component.ErrorPage
 import com.example.component.LoadingPage
 import com.example.core.model.CastUI
 import com.example.core.model.MovieDetailUI
@@ -44,6 +45,7 @@ fun DetailContent(
     movie: MovieDetailUI?,
     isLoading: Boolean,
     cast: List<CastUI>,
+    errorMessage: String,
     onBackClick: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp / 2
@@ -60,6 +62,8 @@ fun DetailContent(
     )
     if (isLoading)
         LoadingPage()
+    else if(errorMessage.isNotEmpty())
+        ErrorPage(errorMessage)
     else {
         LazyColumn(
             modifier = Modifier

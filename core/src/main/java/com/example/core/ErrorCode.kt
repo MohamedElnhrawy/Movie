@@ -1,0 +1,24 @@
+package com.example.core
+
+enum class ErrorCode(vararg val code: Long) {
+    UAE_PASS_NOT_UPGRADED(838314L, 838315L),
+    UAE_PASS_FOUND_MULTIPLE_PROFILES(838313L),
+    UAE_PASS_CANT_FETCH_PROFILE(838303L),
+    EMAIL_ALREADY_VERIFIED_ERROR_CODE(838378L),
+    EMAIL_LINK_EXPIRED_ERROR_CODE(838379L),
+    PASSWORD_LINK_EXPIRED_ERROR_CODE(838380L),
+    ALREADY_LOGGED_IN(838319L),
+    LINK_EXPIRED(970008L),
+
+    TOO_MANY_REQUESTS(9999L),
+    MIGRATION_ERROR(8888L),
+    UN_AUTHORIZED(403L),
+    INVALID_PAGE(22L),
+    UNKNOWN,
+    ;
+
+    companion object {
+
+        fun getErrorCode(code: Long) = values().firstOrNull { code in it.code } ?: UNKNOWN
+    }
+}

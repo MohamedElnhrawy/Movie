@@ -1,5 +1,9 @@
-package com.example.detail.data.model.detail
+package com.example.core.remote.response.detail
 
+import com.example.detail.data.model.detail.Genre
+import com.example.detail.data.model.detail.ProductionCompany
+import com.example.detail.data.model.detail.ProductionCountry
+import com.example.detail.data.model.detail.SpokenLanguage
 import com.google.gson.annotations.SerializedName
 
 data class MovieDetail(

@@ -1,7 +1,8 @@
 package com.example.core.di
 
+import com.example.core.local.database.MovieDatabase
+import com.example.core.remote.datasource.MovieDataSource
 import com.example.core.remote.service.DetailApiService
-import com.example.core.remote.service.HomeApiService
 import com.example.core.repos.details.DetailMovieRepository
 import com.example.core.repos.details.DetailMovieRepositoryImpl
 import com.example.core.repos.home.MovieRepository
@@ -19,8 +20,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(apiService: HomeApiService): MovieRepository {
-        return MovieRepositoryImpl(apiService = apiService)
+    fun provideMovieRepository(dataSource: MovieDataSource,movieDatabase:MovieDatabase): MovieRepository {
+        return MovieRepositoryImpl(dataSource = dataSource, database = movieDatabase)
     }
 
 

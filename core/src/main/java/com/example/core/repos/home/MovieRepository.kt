@@ -1,15 +1,18 @@
 package com.example.core.repos.home
 
-import androidx.paging.PagingData
+import com.example.core.local.entity.PlayingMovieEntity
+import com.example.core.local.entity.PopularMovieEntity
+import com.example.core.local.entity.UpcomingMovieEntity
 import kotlinx.coroutines.flow.Flow
-import com.example.core.remote.response.home.Result
+import com.example.core.repos.paging.utils.PagingDataWithSource
+import kotlinx.coroutines.CoroutineScope
 
 
 interface MovieRepository {
 
-     fun getUpComingMovies() : Flow<PagingData<Result>>
+     fun getUpComingMovies(scope: CoroutineScope,) : Flow<PagingDataWithSource<UpcomingMovieEntity>>
 
-     fun getPopularMovies() : Flow<PagingData<Result>>
+     fun getPopularMovies(scope: CoroutineScope,) : Flow<PagingDataWithSource<PopularMovieEntity>>
 
-     fun getNowPlayingMovies() : Flow<PagingData<Result>>
+     fun getNowPlayingMovies(scope: CoroutineScope,) : Flow<PagingDataWithSource<PlayingMovieEntity>>
 }

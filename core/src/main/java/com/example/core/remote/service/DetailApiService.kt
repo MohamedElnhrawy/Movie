@@ -2,7 +2,7 @@ package com.example.core.remote.service
 
 import com.example.core.utils.Constants
 import com.example.detail.data.model.credit.Credit
-import com.example.detail.data.model.detail.MovieDetail
+import com.example.core.remote.response.detail.MovieDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,7 +1,7 @@
 package com.example.core.repos.details
 
 import com.example.detail.data.model.credit.Credit
-import com.example.detail.data.model.detail.MovieDetail
+import com.example.core.remote.response.detail.MovieDetail
 
 interface DetailMovieRepository {
 

@@ -17,6 +17,7 @@ fun DetailScreen(onNavigateHome: () -> Unit) {
         DetailContent(
             movie = state.movie,
             isLoading = state.isLoading,
+            errorMessage = state.error,
             cast = castList,
             onBackClick = onNavigateHome
         )
