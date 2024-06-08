@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 data class HomeUIState(
     var movies : MutableStateFlow<PagingData<HomeUI>> =  MutableStateFlow(value = PagingData.empty()),
     var isLoading : Boolean = false,
-    var error : String = ""
+    var error : String = "",
+    var selectedTabIndex: Int = 0
 )

@@ -9,10 +9,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 fun HomeScreen(onNavigateDetailScreen : (String) -> Unit) {
     val viewModel: HomeViewModel = hiltViewModel()
     val pagingItems = viewModel.movieList.collectAsLazyPagingItems()
-    val selectedTabIndex = viewModel.selectedTabIndex
     val state = viewModel.state.value
         HomeContent( pagingItems = pagingItems, onNavigateDetailScreen = onNavigateDetailScreen,
-            selectedTabIndex = selectedTabIndex,
+            selectedTabIndex = state.selectedTabIndex,
         error = state.error,
             isLoading = state.isLoading
 

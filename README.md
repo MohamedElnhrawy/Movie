@@ -4,7 +4,9 @@ This movie application provides users with an extensive collection of films, all
 
 ## Overview
 - This project embraces a robust development approach by incorporating Multi-Module, MVVM (Model-View-ViewModel), and Clean Architecture principles.
-
+- kindly not forgot to update your local.properties file with theses keys 
+- API_KEY=58a122760a6319ec8c705776019a2429 
+- BASE_URL=https://api.themoviedb.org/3/
 
 # MVVM-Clean-Architecture:
 Model-view-viewmodel is a software design pattern consisting of three layers:

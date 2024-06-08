@@ -25,10 +25,6 @@ object RepositoryModule {
     }
 
 
-
-
-
-
     @Provides
     @Singleton
     fun provideDetailMovieRepository(detailApiService: DetailApiService): DetailMovieRepository {

@@ -56,7 +56,11 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.espresso.core
-
+    implementation libs.androidx.junit.ktx
+    testImplementation libs.mockito
+    testImplementation libs.arch
+    testImplementation libs.coroutines.test
+    testImplementation libs.room.test
 
     // Pager Indicator
     implementation libs.accompanist.pager

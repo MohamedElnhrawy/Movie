@@ -14,4 +14,13 @@ data class SingleEvent<T>(
         result = 31 * result + sourceId
         return result
     }
+
+    fun getContentIfNotHandled(): T? {
+        return if (isHandled) {
+            null
+        } else {
+            isHandled = true
+            data
+        }
+    }
 }

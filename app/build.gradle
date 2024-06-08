@@ -61,6 +61,10 @@ dependencies {
     implementation libs.compose.ui.tooling.preview
     implementation libs.compose.material
     implementation libs.compose.ui.util
+    implementation libs.androidx.junit.ktx
+    testImplementation libs.mockito
+    testImplementation libs.arch
+    testImplementation libs.coroutines.test
 
     // Dependency Injection - Hilt
     kapt libs.dagger.hilt.compiler

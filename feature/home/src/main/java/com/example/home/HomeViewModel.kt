@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
         private set
 
 
-    var selectedTabIndex: Int = 0
+
 
 
     private fun loadMovies(type: MovieType) {
@@ -75,10 +75,10 @@ class HomeViewModel @Inject constructor(
     }
 
     fun toggleTabs(type: MovieType) {
-        selectedTabIndex = when (type) {
+        state.value.selectedTabIndex = when (type) {
             MovieType.NOW_PLAYING -> 0
-            MovieType.POPULAR -> 1
-            MovieType.UPCOMING -> 2
+            MovieType.UPCOMING -> 1
+            MovieType.POPULAR -> 2
         }
         loadMovies(type)
     }
