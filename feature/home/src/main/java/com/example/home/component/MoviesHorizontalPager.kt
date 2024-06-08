@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,16 +23,12 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
-import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
-import com.example.component.ErrorDialog
+import com.example.home.component.model.HomeUI
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.example.core.model.ResultHomeUI
-import com.example.home.component.model.HomeUI
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
@@ -49,49 +44,18 @@ fun MoviesHorizontalPager(
     ) { page ->
 
         pagingItems.apply {
-//            when {
-//                loadState.refresh is LoadState.Loading -> {
-//                    // Show loading indicator while initial data is being loaded
-//                    CircularProgressIndicator(Modifier.padding(top = 10.dp))
-//                }
-//                loadState.append is LoadState.Loading -> {
-//                    // Show loading indicator while additional data is being appended
-//                    CircularProgressIndicator(Modifier.padding(top = 10.dp))
-//                }
-//               loadState.append is LoadState.Error -> {
-//                    // Show error message for appending load error
-//                    (pagingItems.loadState.append as LoadState.Error).error.localizedMessage?.let {
-//                        ErrorDialog(
-//                            errorMessage = it,
-//                            onRetryClick = { retry() },
-//                        )
-//                    }
-//                }
-//                loadState.refresh is LoadState.Error -> {
-//                    // Show error message for initial load error
-//                    (pagingItems.loadState.refresh as LoadState.Error).error.localizedMessage?.let {
-//                        ErrorDialog(
-//                            errorMessage = it,
-//                            onRetryClick = { retry() },
-//                        )
-//                    }
-//                }
-//                else -> {
-                    val pageOffset = (state.currentPage - page) + state.currentPageOffset
-                    val scaleFactor = 0.75f + (1f - 0.75f) * (1f - pageOffset.absoluteValue)
-                    MovieItem(
-                        movie = pagingItems[page]!!,
-                        pageOffset = pageOffset,
-                        scale = scaleFactor,
-                        onNavigateDetailScreen = onNavigateDetailScreen
-                    )
-                }
-//            }
-
-//        }
+            val pageOffset = (state.currentPage - page) + state.currentPageOffset
+            val scaleFactor = 0.75f + (1f - 0.75f) * (1f - pageOffset.absoluteValue)
+            MovieItem(
+                movie = pagingItems[page]!!,
+                pageOffset = pageOffset,
+                scale = scaleFactor,
+                onNavigateDetailScreen = onNavigateDetailScreen
+            )
         }
-
     }
+
+}
 
 
 @Composable
@@ -144,10 +108,12 @@ fun MovieItem(
                 contentScale = ContentScale.Crop
             )
 
-            Box(modifier = Modifier
-                .padding(12.dp)
-                .align(Alignment.BottomCenter)
-                .background(Color(0x4D000000)))
+            Box(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.BottomCenter)
+                    .background(Color(0x4D000000))
+            )
             {
                 Text(
                     modifier = Modifier

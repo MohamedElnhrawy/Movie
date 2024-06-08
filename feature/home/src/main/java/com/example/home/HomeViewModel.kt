@@ -16,6 +16,8 @@ import com.example.home.component.model.HomeUI
 import com.example.home.component.model.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -36,7 +38,6 @@ class HomeViewModel @Inject constructor(
 
 
     private fun loadMovies(type: MovieType) {
-//        viewModelScope.launch {
         with(viewModelScope) {
             val request = when (type) {
                 MovieType.NOW_PLAYING -> homeUseCases.getNowPlayingMovieUseCase.invoke(this)
@@ -57,14 +58,14 @@ class HomeViewModel @Inject constructor(
                     }
 
                     is PagingDataWithSource.Success -> {
-//                        PagingDataWithSource(pagingDataWithSource.pagingData.map { it.toUI() }, pagingDataWithSource.source, pagingDataWithSource.totalCount)
-//                        when(pagingDataWithSource.pagingData){
-//
-//                        }
                         movieList.value = transformToMovieEntity(type,pagingDataWithSource.pagingData)
                     }
                 }
-            }.launchIn(this)
+            }.catch() {
+                state.value = HomeUIState(
+                   error = it.cause?.message ?: "Something Went Wrong!"
+                )
+            }.distinctUntilChanged().launchIn(this)
         }
     }
 
@@ -91,7 +92,6 @@ class HomeViewModel @Inject constructor(
 
             }
         }
-//        return PagingDataWithSource(pagingData, pagingDataWithSource.source, pagingDataWithSource.totalCount)
         return pagingData
     }
 

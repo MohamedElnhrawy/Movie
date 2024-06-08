@@ -27,15 +27,21 @@ class PlayingMoviesListRemoteMediator
         pageSize: Int
     ): Result<Pair<Int, List<PlayingMovieEntity>>> {
         val result = remote.getNowPlayingMovie(page = pageKey)
+        try {
+            return if (result is Result.Success) {
+                val data = result.data
+                val (totalCount, movies) =
+                    data.totalResults to data.movieResponses.map { it.toLocalPlaying() }
 
-        return if (result is Result.Success) {
-            val data = result.data
-            val (totalCount, movies) =
-                data.totalResults to data.movieResponses.map { it.toLocalPlaying() }
-
-            Result.Success((totalCount) to movies)
-        } else {
-            (result as? Result.Error) ?: Result.error()
+                Result.Success((totalCount) to movies)
+            } else {
+                (result as? Result.Error) ?: Result.error()
+            }
+        } catch (e: Exception) {
+            return Result.Error(
+                errorCause = e.cause,
+                errorMessage = e.message ?: e.localizedMessage
+            )
         }
     }
 

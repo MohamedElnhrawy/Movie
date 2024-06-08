@@ -30,7 +30,6 @@ class DetailViewModel @Inject constructor(
         savedStateHandle.get<String>(Constants.MOVIE_ID)?.let {
             loadMovie(movieId = it.toInt())
             loadCast(movieId = it.toInt())
-            println("MOVIE ID $it")
         }
     }
 
@@ -39,7 +38,6 @@ class DetailViewModel @Inject constructor(
             when (response) {
                 is Response.Success -> {
                     state.value = DetailUIState(movie = response.data)
-                    println("Movie ${response.data}")
                 }
 
                 is Response.Loading -> {

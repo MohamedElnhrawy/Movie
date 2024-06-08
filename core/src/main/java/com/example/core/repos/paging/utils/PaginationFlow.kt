@@ -60,7 +60,9 @@ fun <T : Any> createPagingFlow(
             ),
             remoteMediator = remoteMediator,
             pagingSourceFactory = pagingSourceFactory,
-        ).flow.cachedIn(scope)
+        ).flow.catch {
+            Log.e(TAG, "Error in paging flow: ${it.cause}")
+        }.cachedIn(scope)
             .combine(totalCountDao.getTotalCountById(source)) { data, count ->
                 PagingDataWithSource.Success(
                     pagingData = data,
