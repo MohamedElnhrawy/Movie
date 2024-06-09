@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.example.core.ErrorCode
+import com.example.core.SingleEvent
 import com.example.core.local.entity.PlayingMovieEntity
 import com.example.core.local.entity.PopularMovieEntity
 import com.example.core.local.entity.UpcomingMovieEntity
@@ -15,6 +17,7 @@ import com.example.core.usecase.home.HomeUseCases
 import com.example.home.component.model.HomeUI
 import com.example.home.component.model.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -25,6 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val homeUseCases: HomeUseCases,
+    private val tokenExpirationFlow: Flow<SingleEvent<Long>>
 ) : ViewModel() {
 
     var movieList: MutableStateFlow<PagingData<HomeUI>> =
@@ -93,6 +97,19 @@ class HomeViewModel @Inject constructor(
             }
         }
         return pagingData
+    }
+
+    init {
+        tokenExpirationFlow.onEach {
+            if (it.isHandled.not()) {
+                state.value = when(ErrorCode.getErrorCode(it.data)){
+                    ErrorCode.UN_AUTHORIZED ->  HomeUIState(error = "UN_AUTHORIZED..!")
+                    ErrorCode.NO_INTERNET ->  HomeUIState(error = "No Internet Connection..!")
+                    else ->  HomeUIState(error = "Something Went Wrong..!")
+                }
+            }
+            it.isHandled = true
+        }.launchIn(viewModelScope)
     }
 
 }

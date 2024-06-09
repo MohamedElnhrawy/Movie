@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.example.component.ErrorPage
+import com.example.component.ErrorPopup
 import com.example.component.LoadingPage
 import com.example.core.repos.home.MovieType
 import com.example.home.component.MoviesHorizontalPager
@@ -31,29 +31,33 @@ fun HomeContent(
 ) {
     if (isLoading)
         LoadingPage()
-    else if(error.isNotEmpty())
-        ErrorPage(error)
     else {
-       LazyColumn(
-           modifier = Modifier
-               .fillMaxSize()
-               .background(MaterialTheme.colorScheme.background)
-               .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
-       ) {
-           item {
-               TabBar(selectedTabIndex, onTabSelected = onTabSelected)
-           }
-           item {
-               Spacer(modifier = Modifier.height(25.dp))
-           }
-           item {
-               MoviesHorizontalPager(
-                   pagingItems = pagingItems,
-                   onNavigateDetailScreen = onNavigateDetailScreen
-               )
-           }
-       }
-   }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
+        ) {
+            item {
+                TabBar(selectedTabIndex, onTabSelected = onTabSelected)
+            }
+            item {
+                Spacer(modifier = Modifier.height(25.dp))
+            }
+            item {
+                MoviesHorizontalPager(
+                    pagingItems = pagingItems,
+                    onNavigateDetailScreen = onNavigateDetailScreen
+                )
+            }
+        }
+
+        if (error.isNotEmpty()) {
+            ErrorPopup(error)
+        }
+
+    }
+
 
 }
 

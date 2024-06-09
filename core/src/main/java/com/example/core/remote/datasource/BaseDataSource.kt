@@ -10,6 +10,8 @@ import com.example.core.remote.getResult
 import com.example.core.ErrorCode
 import com.example.core.remote.Result
 import com.example.core.remote.getResultRaw
+import com.example.core.remote.interceptors.NoConnectivityException
+
 abstract class BaseDataSource(
     private val moshi: Moshi,
     private val tokenExpirationFlow: MutableStateFlow<SingleEvent<Long>>,
@@ -25,16 +27,14 @@ abstract class BaseDataSource(
         if (result is Result.Error) {
             when {
                 result.errorCode == AUTH_ERROR_CODE || result.errorCause is HttpException && result.errorCause.code() == AUTH_ERROR_CODE.toInt() -> {
-//                    val httpException = result.errorCause as? HttpException
-//                    val request = httpException?.response()?.raw()?.request()
-//                    val url = request?.url()
-//                    val pathHashCode = url?.encodedPath()?.hashCode()
                     val sourceId = result.errorCode.toInt()
                     tokenExpirationFlow.value = SingleEvent(AUTH_ERROR_CODE, sourceId)
                 }
-                ErrorCode.getErrorCode(result.errorCode) == ErrorCode.LINK_EXPIRED -> {
-                    tokenExpirationFlow.value = SingleEvent(result.errorCode, System.currentTimeMillis().toInt())
+                result.errorCause is NoConnectivityException -> {
+                    val sourceId = result.errorCode.toInt()
+                    tokenExpirationFlow.value = SingleEvent(ErrorCode.NO_INTERNET.code.first(), sourceId)
                 }
+
                 result.errorCause != null && result.errorCause.isTooManyRequestsException() -> {
                     val sourceId = result.errorCode.toInt()
                     tokenExpirationFlow.value = SingleEvent(ErrorCode.TOO_MANY_REQUESTS.code.first(), sourceId)
